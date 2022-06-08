@@ -57,3 +57,13 @@
     padding: 5px;
     font-size: 1.2rem;
 }
+
+@media all and (max-width: 370px) {
+    .sign-in-content {
+        box-sizing: border-box;
+        background-color: white;
+        width: 260px;
+        margin: 0 auto;
+        padding: 1.5rem;
+    }
+}
