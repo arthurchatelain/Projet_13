@@ -2,7 +2,7 @@ import { createStore } from "redux";
 
 // state 
 
-const initialState =  JSON.parse(localStorage.state) || {
+const initialState =  (localStorage.state !== undefined) ? JSON.parse(localStorage.state) : {
 rememberMe: false,
 token: null,
 userData: null,
