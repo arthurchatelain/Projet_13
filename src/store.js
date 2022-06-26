@@ -3,10 +3,10 @@ import { createStore } from "redux";
 // state 
 
 const initialState =  (localStorage.state !== undefined) ? JSON.parse(localStorage.state) : {
-rememberMe: false,
-token: null,
-userData: null,
-id: null
+  rememberMe: false,
+  token: null,
+  userData: null,
+  id: null
 }
 
 // actions creators

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { SET_REMEMBER_ME, SET_TOKEN, SET_USER_DATA, SET_USER_ID } from "../store";
 import { callGetProfile, callLogin } from "../API/Call";
+import { useState } from "react";
 
 export default function Login () {
     
@@ -19,6 +20,11 @@ export default function Login () {
           })
     }
 
+    // state Initialisation
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const [rememberMe, setRememberMe] = useState(false)
+
     // Initialisation Hooks
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -26,10 +32,7 @@ export default function Login () {
     // User's authentication
     const login = (e) => {
         e.preventDefault()
-        const username = document.getElementById('username').value
-        const password = document.getElementById('password').value
-        const rememberMe = document.getElementById('remember-me').checked
-        const body = JSON.stringify({'email': username, 'password': password})
+        const body = JSON.stringify({'email': userName, 'password': password})
         callLogin(body).then(data => {
             if(data.ok === true) return data.json()
             else alert("Erreur d'authentification")
@@ -54,9 +57,9 @@ export default function Login () {
                     <i className="fa fa-user-circle sign-in-icon"></i>
                     <h1>Login</h1>
                     <form>
-                        <div className="input-wrapper"><label htmlFor="username">Username</label><input autoComplete="Off" type="text" id="username" /></div>
-                        <div className="input-wrapper"><label htmlFor="password">Password</label><input autoComplete="Off" type="password" id="password" /></div>
-                        <div className="input-remember"><input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label></div>
+                        <div className="input-wrapper"><label htmlFor="username">Username</label><input autoComplete="Off" onChange={e => setUserName(e.target.value)}  type="text" id="username" /></div>
+                        <div className="input-wrapper"><label htmlFor="password">Password</label><input autoComplete="Off" onChange={e => setPassword(e.target.value)} type="password" id="password" /></div>
+                        <div className="input-remember"><input type="checkbox" onChange={e => setRememberMe(e.target.checked)} id="remember-me" /><label htmlFor="remember-me">Remember me</label></div>
                         <button className="sign-in-button" onClick={e => login(e)}>Login</button>
                         <Link to='/signup'><button className="sign-in-button">Sign Up</button></Link>
                     </form>

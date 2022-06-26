@@ -31,12 +31,12 @@ export const callGetProfile = (token) => {
     })
 }
 
-export const callSetProfile = (body) => {
+export const callSetProfile = (body, token) => {
     return fetch("http://localhost:3001/api/v1/user/profile", {
         body: body,
         headers: {
             Accept: "application/json",
-            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWZiNjhiMTcyNmM1MTY1NDQ3MjdkMCIsImlhdCI6MTY1NDcxNjg3NiwiZXhwIjoxNjU0ODAzMjc2fQ.JnshhzlNt0yzmvhIGgOMvZA54ys-O4Xm3Eqo_oVxYnQ",
+            Authorization: "Bearer " + token,
             "Content-Type": "application/json"},
         method: "PUT"
     }).then(data => data.json()).catch(err => {
